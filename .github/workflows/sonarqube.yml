@@ -29,7 +29,7 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: http://192.168.1.118:9000/projects/create  # Update this to your SonarQube server URL
+          SONAR_HOST_URL: http://192.168.1.118:9000/projects/create
         run: |
           cd app
           mvn -X verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
