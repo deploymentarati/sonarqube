@@ -32,19 +32,21 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**app/pom.xml') }}
+          key: ${{ runner.os }}-m2-${{ hashFiles('app/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-
-      - name: Set Java version for Maven
-        run: |
-          echo "java.version=17" >> $GITHUB_WORKSPACE/app/maven.properties
 
       - name: Change to app directory
         run: cd app
+
+      - name: Set Java version for Maven
+        run: |
+          echo "java.version=17" >> maven.properties
+          mvn -N io.takari:maven:wrapper
+          ./mvnw --version
 
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+        run: ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
