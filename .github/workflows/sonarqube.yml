@@ -36,9 +36,9 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
+        run: |
+          sudo apt-get install openjdk-17-jdk
+          echo "JAVA_HOME=$(which java)" >> $GITHUB_ENV
 
       - name: Build and analyze
         env:
