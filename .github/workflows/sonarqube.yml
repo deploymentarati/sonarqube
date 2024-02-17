@@ -23,11 +23,13 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**app/pom.xml') }}
+          key: ${{ runner.os }}-m2-${{ hashFiles('app/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: http://localhost:9000  # Update this to your SonarQube server URL
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+        run: |
+          cd app
+          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
