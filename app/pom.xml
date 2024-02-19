@@ -44,6 +44,28 @@
 					<target>17</target>
 				</configuration>
 			</plugin>
+			<!-- SonarQube Maven plugin configuration -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.10.0.2594</version>
+                <executions>
+                    <execution>
+                        <id>sonarqube</id>
+                        <goals>
+                            <goal>sonar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- SonarQube server URL -->
+                    <sonar.host.url>http://localhost:9000</sonar.host.url>
+                    <!-- SonarQube project key -->
+                    <sonar.projectKey>sonarproject</sonar.projectKey>
+                    <!-- SonarQube authentication token -->
+                    <sonar.login>${env.sonartoken}</sonar.login>
+                </configuration>
+            </plugin>
 		</plugins>
 		<finalName>app</finalName>
 	</build>
