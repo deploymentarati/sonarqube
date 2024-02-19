@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.3</version> <!-- Use a compatible version -->
+		<version>2.6.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.application.springboot</groupId>
@@ -21,14 +21,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -57,14 +55,7 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <!-- SonarQube server URL -->
-                    <sonar.host.url>http://localhost:9000</sonar.host.url>
-                    <!-- SonarQube project key -->
-                    <sonar.projectKey>sonarproject</sonar.projectKey>
-                    <!-- SonarQube authentication token -->
-                    <sonar.login>${env.sonartoken}</sonar.login>
-                </configuration>
+                <!-- You can add additional configurations here if needed -->
             </plugin>
 		</plugins>
 		<finalName>app</finalName>
