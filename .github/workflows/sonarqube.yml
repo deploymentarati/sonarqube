@@ -30,6 +30,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          projectKey: sonarproject
         run: |
           cd app
           mvn clean install sonar:sonar -B
