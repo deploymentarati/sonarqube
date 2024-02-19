@@ -32,4 +32,4 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: |
           cd app
-          mvn -X verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+          mvn clean install sonar:sonar -B
