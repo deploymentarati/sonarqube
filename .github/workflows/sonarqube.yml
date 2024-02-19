@@ -1,28 +1,35 @@
+name: Build and Analyze
+
 on:
-  # Trigger analysis when pushing to main or pull requests, and when creating
-  # a pull request.
   push:
     branches:
       - main
-  pull_request:
-    types: [opened, synchronize, reopened]
-
-name: SonarQube Scan
 
 jobs:
-  sonarqube:
-    name: SonarQube Trigger
+  build:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checking out
-      uses: actions/checkout@main
-      with:
-        # Disabling shallow clone is recommended for improving relevancy of reporting
-        fetch-depth: 0
-    - name: SonarQube Scan
-      uses: deploymentarati/sonarqube@v1  # Use the latest version or a specific version that you know exists
-      with:
-        host: ${{ secrets.SONAR_HOST_URL }}
-        login: ${{ secrets.SONAR_TOKEN }}
-        projectKey: sonarproject
-        options: -X  # Add this line to enable full debug logging
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('app/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: SonarQube Scan
+        uses: deploymentarati/sonarqube@v2 # Use the latest version or a specific version that you know exists
+        with:
+          host: ${{ secrets.SONAR_HOST_URL }}
+          login: ${{ secrets.SONAR_TOKEN }}
+          projectKey: sonarproject
+          options: -X  # Add this line to enable full debug logging
