@@ -26,10 +26,11 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('app/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: SonarQube Scan
-        uses: deploymentarati/sonarqube@v1  # Use the latest version or a specific version that you know exists
-        with:
-          host: ${{ secrets.SONAR_HOST_URL }}
-          login: ${{ secrets.SONAR_TOKEN }}
-          projectKey: sonarproject
-          options: -X  # Add this line to enable full debug logging
+      - name: Build and analyze
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_PROJECT_KEY: sonarproject  # Corrected the environment variable name
+        run: |
+          cd app
+          mvn clean install sonar:sonar -B
