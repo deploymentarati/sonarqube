@@ -27,7 +27,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: SonarQube Scan
-       
+        uses: deploymentarati/sonarqube@v1  # Use the latest version or a specific version that you know exists
         with:
           host: ${{ secrets.SONAR_HOST_URL }}
           login: ${{ secrets.SONAR_TOKEN }}
