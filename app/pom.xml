@@ -46,7 +46,7 @@
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.10.0.2594</version>
+                <version>3.11.0.1615</version>
                 <executions>
                     <execution>
                         <id>sonarqube</id>
@@ -55,7 +55,13 @@
                         </goals>
                     </execution>
                 </executions>
-                <!-- You can add additional configurations here if needed -->
+                <configuration>
+                    <!-- URL to the SonarQube server -->
+                    <sonar.host.url>http://localhost:9000</sonar.host.url>
+                    <!-- SonarQube authentication token -->
+                    <sonar.login>41e1696e0bebad0a03d96174688e8384e55ed9c9</sonar.login>
+                    <!-- Additional SonarQube analysis properties can be added here -->
+                </configuration>
             </plugin>
 		</plugins>
 		<finalName>app</finalName>
