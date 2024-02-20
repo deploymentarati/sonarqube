@@ -15,6 +15,9 @@
 	<description>Demo project for Spring Boot application</description>
 	<properties>
 		<java.version>17</java.version>
+		<!-- SonarQube properties -->
+		<sonar.organization>deploymentarati</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -57,7 +60,7 @@
                 </executions>
                 <configuration>
                     <!-- URL to the SonarQube server -->
-                    <sonar.host.url>http://localhost:9000</sonar.host.url>
+                    <sonar.host.url>${sonar.host.url}</sonar.host.url>
                     <!-- SonarQube authentication token -->
                     <sonar.login>41e1696e0bebad0a03d96174688e8384e55ed9c9</sonar.login>
                     <!-- Additional SonarQube analysis properties can be added here -->
